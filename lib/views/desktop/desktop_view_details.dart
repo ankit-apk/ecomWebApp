@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:ecommerce_web/colors/colors.dart';
+import 'package:ecommerce_web/controller/firebase_productController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,90 +13,122 @@ class DesktopProductDetail extends StatefulWidget {
 }
 
 class _DesktopProductDetailState extends State<DesktopProductDetail> {
+  FirebaseProdutController products = Get.put(FirebaseProdutController());
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, screenConstraints) {
-        if (screenConstraints.maxWidth > 600) {
-          return Scaffold(
-            // body: Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Image.memory(
-            //       base64Decode(
-            //         Get.arguments['imageLink'],
-            //       ),
-            //     ),
-            //     Column(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: [
-            //         Text(
-            //           Get.arguments['product_name'],
-            //         ),
-            //         Text(
-            //           Get.arguments['product_price'],
-            //         ),
-            //         Text(
-            //           Get.arguments['product_description'],
-            //         ),
-            //         // Text(
-            //         //   Get.arguments['poduct_description'],
-            //         // ),
-            //       ],
-            //     )
-            //   ],
-            // ),
-            body: Stack(
-              children: [
-                Positioned.fill(
-                  child: Container(
-                    color: Colors.transparent,
-                  ),
+    return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          products.launchWhatsapp(Get.arguments['product_name']);
+        },
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 50.0),
+            child: Container(
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height / 12,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(30),
+                color: UiColors.buttonColors,
+              ),
+              child: Center(
+                child: Text(
+                  "Query",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
-                Positioned.directional(
-                  textDirection: TextDirection.ltr,
+              ),
+            ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                AspectRatio(
+                  aspectRatio: 8 / 10,
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: MediaQuery.of(context).size.height,
-                    child: Image.memory(
-                      base64Decode(
-                        Get.arguments['imageLink'],
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                      child: Image.memory(
+                        base64Decode(Get.arguments['imageLink']),
+                        fit: BoxFit.cover,
                       ),
-                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
-                Positioned.directional(
-                  textDirection: TextDirection.rtl,
-                  top: 20,
-                  child: Column(
-                    children: [
-                      Text(
-                        Get.arguments['product_name'],
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.04,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        Get.arguments['product_description'],
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.028,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 52.0, left: 16),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.arrow_back_ios_outlined,
+                            color: Colors.black,
+                          )),
+                    ),
                   ),
                 ),
               ],
             ),
-          );
-        }
-        return Container();
-      },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                    top: 10,
+                  ),
+                  child: Text(
+                    Get.arguments['product_name'],
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: MediaQuery.of(context).size.height * 0.030,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 24.0, right: 16),
+                  child: Text(
+                    'Rs. ${Get.arguments['product_price']}',
+                    style: TextStyle(
+                        color: UiColors.buttonColors,
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.height * 0.035),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 100),
+              child: Container(
+                child: Text(
+                  '${Get.arguments['product_description']}',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.height * 0.026,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
