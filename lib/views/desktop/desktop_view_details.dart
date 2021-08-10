@@ -104,12 +104,26 @@ class _DesktopProductDetailState extends State<DesktopProductDetail> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0, right: 16),
-                  child: Text(
-                    'Rs. ${Get.arguments['product_price']}',
-                    style: TextStyle(
-                        color: UiColors.buttonColors,
-                        fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height * 0.035),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Rs. ${Get.arguments['product_price']}',
+                        style: TextStyle(
+                            color: UiColors.buttonColors,
+                            fontWeight: FontWeight.bold,
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.035),
+                      ),
+                      Text(
+                        '+ Rs.60\nDelivery',
+                        style: TextStyle(
+                            color: UiColors.textColor2,
+                            fontWeight: FontWeight.bold,
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.025),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -125,6 +139,9 @@ class _DesktopProductDetailState extends State<DesktopProductDetail> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 100,
             ),
           ],
         ),

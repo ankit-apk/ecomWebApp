@@ -26,7 +26,7 @@ class FirebaseProdutController extends GetxController {
 
   launchWhatsapp(String prn) async {
     final link = WhatsAppUnilink(
-      phoneNumber: '+91-7004297500',
+      phoneNumber: '+91-7272911770',
       text: "Hey! I'm inquiring about the $prn",
     );
     await launch('$link');

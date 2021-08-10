@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ecommerce_web/colors/colors.dart';
 import 'package:ecommerce_web/controller/firebase_productController.dart';
 import 'package:ecommerce_web/views/desktop/desktop_view_details.dart';
@@ -68,15 +67,20 @@ class _DesktopHomeState extends State<DesktopHome> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(
-                                        products.productList[index]
-                                            ['product_description'],
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.03,
-                                            fontWeight: FontWeight.w500),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.8,
+                                        child: Text(
+                                          products.productList[index]
+                                              ['product_description'],
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.03,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 8,
@@ -175,17 +179,42 @@ class _DesktopHomeState extends State<DesktopHome> {
                               ),
                               Positioned.directional(
                                 end: 12,
-                                bottom: 30,
+                                bottom: 20,
                                 textDirection: TextDirection.ltr,
-                                child: Text(
-                                  '₹${products.productList[index]['product_price']}',
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.035,
-                                    fontWeight: FontWeight.bold,
-                                    color: UiColors.buttonColors,
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      '₹${products.productList[index]['product_price']}',
+                                      style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.035,
+                                        fontWeight: FontWeight.bold,
+                                        color: UiColors.buttonColors,
+                                      ),
+                                    ),
+                                    Text(
+                                      '+₹60',
+                                      style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.025,
+                                        fontWeight: FontWeight.bold,
+                                        color: UiColors.textColor2,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Delivery',
+                                      style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.020,
+                                        fontWeight: FontWeight.bold,
+                                        color: UiColors.textColor2,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

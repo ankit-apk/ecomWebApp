@@ -8,4 +8,5 @@ class UiColors {
   static const inacticeColor = Color(0xffd8d8d8);
   static const searchBoxColor = Color(0xfff7f8fb);
   static const splashColor = Color(0xff412047);
+  static const textColor2 = Colors.green;
 }
